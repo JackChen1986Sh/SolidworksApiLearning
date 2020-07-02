@@ -7,6 +7,12 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+       
+        <StackPanel>
+            <Button Content="打开Solidworks软件" Width="200" Height="30" FontSize="18" HorizontalAlignment="Left" Click="Button_Click"/>
+
+        </StackPanel>
+        
         
     </Grid>
 </Window>

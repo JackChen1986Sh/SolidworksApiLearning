@@ -13,6 +13,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using SolidWorks.Interop.sldworks;
+using SolidWorks.Interop.swconst;
+
 namespace SolidworksLearning
 {
     /// <summary>
@@ -23,6 +26,12 @@ namespace SolidworksLearning
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            SldWorks SwApp = new SldWorks();
+            SwApp.Visible = true;
         }
     }
 }
