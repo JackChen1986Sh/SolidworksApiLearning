@@ -44,7 +44,7 @@ namespace SolidworksLearning
         }
         public void InitLesson()
         {
-            CreateLessonRow("Solidworks应用程序对象", "初识SldWorks对象", "新建", "获取", "");
+            CreateLessonRow("Solidworks应用程序对象", "初识SldWorks对象", "新建", "获取", "无");
          
 
 

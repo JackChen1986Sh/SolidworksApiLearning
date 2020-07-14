@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SolidworksLearning"
         mc:Ignorable="d"
-        Title="Solidworks API二次开发学习" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+        Title="Solidworks API二次开发学习" Height="500" Width="1000" WindowStartupLocation="CenterScreen">
 
     <Window.Background>
         <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
@@ -49,6 +49,11 @@
             </Grid>
 
             <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition x:Name="col_list" Width="1*"/>
+                    <ColumnDefinition x:Name="col_other" Width="200"/>
+                </Grid.ColumnDefinitions>
+
                 <DataGrid x:Name="dgv_articlelist" Margin="1,1,1,1" Grid.Column="0" ItemsSource="{Binding}"  AutoGenerateColumns="False" HorizontalAlignment="Stretch" CanUserResizeRows="False"   AlternationCount="2" CanUserAddRows="False" FontSize="18">
                     <!-- 列头样式  -->
                     <DataGrid.ColumnHeaderStyle>
@@ -81,7 +86,7 @@
                     </DataGrid.RowStyle>
                     <DataGrid.Columns>
                         <!-- 显示内容 -->
-                        <DataGridTextColumn Header="序号" Width="20" Binding="{Binding ID}"  CanUserSort="False" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="序号" Width="40" Binding="{Binding ID}"  CanUserSort="False" IsReadOnly="True"/>
                         <DataGridTextColumn Header="文章名称" Width="0.5*" Binding="{Binding ArticleName}"  IsReadOnly="True" CanUserSort="False"/>
                         <DataGridTextColumn Header="文章描述" Width="0.5*" Binding="{Binding ArticleDesc}"  IsReadOnly="True" CanUserSort="False"/>
                         <DataGridTemplateColumn x:Name="Sample1" Header="示例1" Width="100">
@@ -224,13 +229,27 @@
                         </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
+
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition x:Name="row_tip1" Height="40"/>
+                        <RowDefinition x:Name="row_pic" Height="200"/>
+                        <RowDefinition x:Name="row_tool" Height="1*"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Content="微信公众号(WeChat)" Grid.Row="0" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <Image Source="公众号二维码.jpg"  Grid.Row="1" />
+                    <Label Content="各类工具下载(待建设)" Grid.Row="2" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    
+                </Grid>
             </Grid>
         </Grid>
 
-        <Grid Grid.Row="2">
-
-
-        </Grid>
-
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <Label Content="各大电商平台可买到我的书" Grid.Row="0" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <Label Content="《Solidworks API二次开发实例详解》" Grid.Row="0" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold"/>
+            <Label Content="及" Grid.Row="0" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <Label Content="《SOLIDWORKS产品设计实例详解》" Grid.Row="0" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold"/>
+        </StackPanel>
     </Grid>
 </Window>
