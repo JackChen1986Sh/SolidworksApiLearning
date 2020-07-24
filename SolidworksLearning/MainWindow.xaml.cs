@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using SolidWorks.Interop.sldworks;
-
+using SolidWorks.Interop.swconst;
 
 using System.Data;
 
@@ -44,12 +44,14 @@ namespace SolidworksLearning
         }
         public void InitLesson()
         {
-            CreateLessonRow("Solidworks应用程序对象", "初识SldWorks对象", "新建", "获取", "无");
-         
+            CreateLessonRow("1.Solidworks应用程序对象", "SldWorks对象初识", "新建", "获取", "无");
+            CreateLessonRow("2.Solidworks应用程序对象", "SldWorks文档操作1", "新建文档", "打开文档", "所有文档");
+  
+
 
 
         }
-        public void CreateLessonRow(string an,string ad,string s1,string s2,string s3)
+        public void CreateLessonRow(string an, string ad, string s1, string s2, string s3)
         {
             DataRow dr = LessonDt.NewRow();
             dr["ID"] = (LessonDt.Rows.Count + 1).ToString().Trim();
@@ -61,7 +63,7 @@ namespace SolidworksLearning
             LessonDt.Rows.Add(dr);
         }
 
-       
+
         private void Sample1_Click(object sender, RoutedEventArgs e)
         {
             DoFunc(dgv_articlelist.SelectedIndex, 1);
@@ -79,16 +81,17 @@ namespace SolidworksLearning
 
         public void DoFunc(int rowindex, int sampleindex)
         {
-            if (rowindex == 0)//1.Solidworks应用程序对象--初识SldWorks对象
+            #region 1.Solidworks应用程序对象--初识SldWorks对象
+            if (rowindex == 0)//
             {
                 if (sampleindex == 1)//新建
                 {
-                    SldWorks swApp=  API_Learn.Learn_Sldworks.NewSolidworksApp();
+                    SldWorks swApp = API_Learn.Learn_Sldworks.NewSolidworksApp();
                     swApp.NewPart();//新建零件,验证获得Solidworks程序对象成功
                 }
-                else if(sampleindex == 2)
+                else if (sampleindex == 2)
                 {
-                    SldWorks swApp=API_Learn.Learn_Sldworks.GetSolidworksApp();
+                    SldWorks swApp = API_Learn.Learn_Sldworks.GetSolidworksApp();
                     if (swApp != null)
                     {
                         swApp.NewPart();//新建零件,验证获得Solidworks程序对象成功
@@ -98,17 +101,79 @@ namespace SolidworksLearning
                         MessageBox.Show("无打开的Solidworks");
                     }
                 }
-             
-
-
             }
-
+            #endregion
+            #region 2.Solidworks应用程序对象
+            else if (rowindex == 1)//
+            {
+                SldWorks swApp = API_Learn.Learn_Sldworks.GetSolidworksApp();
+                if (sampleindex == 1)//新建
+                {
+                    ModelDoc2 PartDoc = swApp.NewDocument(AppDomain.CurrentDomain.BaseDirectory + @"SwFile\PartTemplate.PRTDOT", (int)swDwgPaperSizes_e.swDwgPaperA0size, 10, 10);
+                    ModelDoc2 AssemDoc = swApp.NewDocument(AppDomain.CurrentDomain.BaseDirectory + @"SwFile\AssemTemplate.ASMDOT", (int)swDwgPaperSizes_e.swDwgPaperA0size, 10, 10);
+                    ModelDoc2 DrawDoc = swApp.NewDocument(AppDomain.CurrentDomain.BaseDirectory + @"SwFile\DrawingTemplate.DRWDOT", (int)swDwgPaperSizes_e.swDwgPaperA0size, 10, 10);
+                    StringBuilder Sb = new StringBuilder();
+                    if (PartDoc != null)
+                    {
+                        Sb.Append("零件新建成功" + PartDoc.GetTitle() + "\r\n");
+                    }
+                    else
+                    {
+                        Sb.Append("零件新建失败！" + "\r\n");
+                    }
+                    if (AssemDoc != null)
+                    {
+                        Sb.Append("装配体新建成功" + AssemDoc.GetTitle() + "\r\n");
+                    }
+                    else
+                    {
+                        Sb.Append("装配体新建失败！" + "\r\n");
+                    }
+                    if (DrawDoc != null)
+                    {
+                        Sb.Append("图纸新建成功" + DrawDoc.GetTitle() + "\r\n");
+                    }
+                    else
+                    {
+                        Sb.Append("图纸新建失败！" + "\r\n");
+                    }
+                    MessageBox.Show(Sb.ToString().Trim());
+                }
+                else if (sampleindex == 2)//打开
+                {
+                    int err = -1;
+                    int warn = -1;
+                    ModelDoc2 OpenDoc = swApp.OpenDoc6(AppDomain.CurrentDomain.BaseDirectory + @"RectanglePlug\PlugTopBox.SLDPRT", (int)swDocumentTypes_e.swDocPART, (int)swOpenDocOptions_e.swOpenDocOptions_AutoMissingConfig,"圆壳",ref err, ref warn);
+                    if (OpenDoc != null)
+                    {
+                        MessageBox.Show("零件打开成功:" + OpenDoc.GetTitle() + "\r\n");
+                    }
+                    else
+                    {
+                        MessageBox.Show("零件打开失败！" + "\r\n");
+                    }
+                }
+                else if (sampleindex == 3)//所有文档
+                {
+                    object[] ObjDocs= swApp.GetDocuments();
+                    if (ObjDocs !=null)
+                    {
+                        StringBuilder Sb = new StringBuilder();
+                        foreach(object x in ObjDocs)
+                        {
+                            if (x is ModelDoc2)
+                            {
+                                Sb.Append(((ModelDoc2)x).GetTitle()+"\r\n");
+                            }
+                        }
+                        MessageBox.Show("打开的文档:\r\n" + Sb.ToString().Trim());
+                    }
+                }
+            }
+            #endregion
+          
 
 
         }
-
-
-
-
     }
 }

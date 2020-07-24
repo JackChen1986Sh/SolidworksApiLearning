@@ -98,7 +98,7 @@
                                     FontSize="20"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
                                             <Button.Template>
                                                 <ControlTemplate TargetType="{x:Type Button}">
-                                                    <Border BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="0" CornerRadius="12,12,12,12" Name="PART_Background">
+                                                    <Border BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="0" CornerRadius="3,3,3,3" Name="PART_Background">
                                                         <Border.Background>
                                                             <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                                                                 <GradientStop Color="#33CC33" Offset="0.0" />
@@ -144,7 +144,7 @@
                                     FontSize="20"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
                                             <Button.Template>
                                                 <ControlTemplate TargetType="{x:Type Button}">
-                                                    <Border BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="0" CornerRadius="12,12,12,12" Name="PART_Background">
+                                                    <Border BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="0" CornerRadius="3,3,3,3" Name="PART_Background">
                                                         <Border.Background>
                                                             <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                                                                 <GradientStop Color="#33CC33" Offset="0.0" />
@@ -190,7 +190,7 @@
                                     FontSize="20"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
                                             <Button.Template>
                                                 <ControlTemplate TargetType="{x:Type Button}">
-                                                    <Border BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="0" CornerRadius="12,12,12,12" Name="PART_Background">
+                                                    <Border BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="0" CornerRadius="3,3,3,3" Name="PART_Background">
                                                         <Border.Background>
                                                             <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                                                                 <GradientStop Color="#33CC33" Offset="0.0" />
