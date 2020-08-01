@@ -106,7 +106,72 @@ namespace SolidworksLearning.API_Learn
                 MessageBox.Show("打开的文档:\r\n" + Sb.ToString().Trim());
             }
         }
+        public static void ActivateDoc(SldWorks iswApp)
+        {
+            int err = -1;
+            int warn = -1;
+            iswApp.OpenDoc6(AppDomain.CurrentDomain.BaseDirectory + @"RectanglePlug\PlugTopBox.SLDPRT", (int)swDocumentTypes_e.swDocPART, (int)swOpenDocOptions_e.swOpenDocOptions_AutoMissingConfig, "圆壳", ref err, ref warn);
+            iswApp.OpenDoc6(AppDomain.CurrentDomain.BaseDirectory + @"RectanglePlug\PlugWire.SLDPRT", (int)swDocumentTypes_e.swDocPART, (int)swOpenDocOptions_e.swOpenDocOptions_AutoMissingConfig, "", ref err, ref warn);
+            ModelDoc2 Doc = iswApp.ActiveDoc;
+            MessageBox.Show("当前激活文档:" + Doc.GetTitle());
+            Doc = iswApp.ActivateDoc3("PlugTopBox.SLDPRT", true, (int)swRebuildOnActivation_e.swRebuildActiveDoc, ref err);
+            MessageBox.Show("文档:" + Doc.GetTitle() + "被激活");
+            Doc = iswApp.ActiveDoc;
+            MessageBox.Show("当前激活文档:" + Doc.GetTitle());
+        }
+        public static void LoadThirdPartFile(SldWorks iswApp)
+        {
+            int err = -1;
+
+            //启用3D Interconnect
+            string FileName = AppDomain.CurrentDomain.BaseDirectory + @"ThirdPart\PlugBottomBox.IGS";
+            ImportIgesData importData = default(ImportIgesData);
+            importData = (ImportIgesData)iswApp.GetImportFileData(FileName);
+            if ((importData != null))//指定参数加载
+            {
+                importData.IncludeSurfaces = true;
+                importData.IncludeCurves = true;
+                importData.CurvesAsSketches = true;
+                importData.ProcessByLevel = false;
+            }
+            iswApp.LoadFile4(FileName, "", importData, ref err);
+
+            //启用3D Interconnect
+            FileName = AppDomain.CurrentDomain.BaseDirectory + @"ThirdPart\PowerStrip.IGS";
+            importData = default(ImportIgesData);
+            importData = (ImportIgesData)iswApp.GetImportFileData(FileName);
+            if ((importData != null))//指定参数加载
+            {
+                importData.IncludeSurfaces = true;
+                importData.IncludeCurves = true;
+                importData.CurvesAsSketches = true;
+                importData.ProcessByLevel = false;
+            }
+            iswApp.LoadFile4(FileName, "", importData, ref err);
+
+            //不启用3D Interconnect
+            FileName = AppDomain.CurrentDomain.BaseDirectory + @"ThirdPart\PlugBottomBoxNon.IGS";
+            iswApp.LoadFile4(FileName, "r", null, ref err);
+
+        }
 
 
-     }
+        public static void CloseDoc(SldWorks iswApp)
+        {
+            int err = -1;
+            int warn = -1;
+            iswApp.OpenDoc6(AppDomain.CurrentDomain.BaseDirectory + @"RectanglePlug\PlugTopBox.SLDPRT", (int)swDocumentTypes_e.swDocPART, (int)swOpenDocOptions_e.swOpenDocOptions_AutoMissingConfig, "圆壳", ref err, ref warn);
+            iswApp.OpenDoc6(AppDomain.CurrentDomain.BaseDirectory + @"RectanglePlug\PlugBottomBox.SLDPRT", (int)swDocumentTypes_e.swDocPART, (int)swOpenDocOptions_e.swOpenDocOptions_AutoMissingConfig, "", ref err, ref warn);
+            iswApp.OpenDoc6(AppDomain.CurrentDomain.BaseDirectory + @"RectanglePlug\PlugWire.SLDPRT", (int)swDocumentTypes_e.swDocPART, (int)swOpenDocOptions_e.swOpenDocOptions_AutoMissingConfig, "", ref err, ref warn);
+            MessageBox.Show("三个文档已打开，点击后，将关闭PlugTopBox.SLDPRT");
+            iswApp.CloseDoc(AppDomain.CurrentDomain.BaseDirectory + @"RectanglePlug\PlugTopBox.SLDPRT");
+            MessageBox.Show("关闭成功，再次点击将关闭所有文档");
+            iswApp.CloseAllDocuments(true);
+            MessageBox.Show("所有文档已关闭");
+        }
+
+
+
+
+    }
 }

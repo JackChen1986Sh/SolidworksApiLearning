@@ -46,7 +46,8 @@ namespace SolidworksLearning
         {
             CreateLessonRow("1.Solidworks应用程序对象", "SldWorks对象初识", "新建", "获取", "无");
             CreateLessonRow("2.Solidworks应用程序对象", "SldWorks文档操作1", "新建文档", "打开文档", "所有文档");
-        
+            CreateLessonRow("3.Solidworks应用程序对象", "SldWorks文档操作2", "文档切换", "加载文档", "关闭文档");
+            //CreateLessonRow("4.Solidworks应用程序对象", "SldWorks文档与系统设置", "系统设置", "文档设置", "无");
 
 
 
@@ -103,7 +104,7 @@ namespace SolidworksLearning
                 }
             }
             #endregion
-            #region 2.Solidworks应用程序对象
+            #region 2.Solidworks应用程序对象--文档操作1
             else if (rowindex == 1)//
             {
                 SldWorks swApp = API_Learn.Learn_Sldworks.GetSolidworksApp();
@@ -121,8 +122,53 @@ namespace SolidworksLearning
                 }
             }
             #endregion
-       
+            #region 3.Solidworks应用程序对象--文档操作2
+            else if (rowindex == 2)//
+            {
+                SldWorks swApp = API_Learn.Learn_Sldworks.GetSolidworksApp();
+                if (sampleindex == 1)//文档切换
+                {
+                    API_Learn.Learn_Sldworks.ActivateDoc(swApp);
+                }
+                else if (sampleindex == 2)//加载
+                {
+                    API_Learn.Learn_Sldworks.LoadThirdPartFile(swApp);
+                }
+                else if (sampleindex == 3)//关闭
+                {
+                    API_Learn.Learn_Sldworks.CloseDoc(swApp);
+                }
+            }
+            #endregion
+            #region 4.Solidworks应用程序对象--文档与系统设置
+            else if (rowindex == 3)//
+            {
+                SldWorks swApp = API_Learn.Learn_Sldworks.GetSolidworksApp();
+                if (sampleindex == 1)//系统设置
+                {
+                    //API_Learn.Learn_Sldworks.ActivateDoc(swApp);
+                }
+                else if (sampleindex == 2)//文档设置
+                {
+                    //API_Learn.Learn_Sldworks.LoadThirdPartFile(swApp);
+                }
+                else if (sampleindex == 3)//
+                {
+                    //API_Learn.Learn_Sldworks.CloseDoc(swApp);
+                    bool sc = swApp.GetPreviewBitmapFile(AppDomain.CurrentDomain.BaseDirectory + @"RectanglePlug\PlugTopBox.SLDPRT", "方壳", AppDomain.CurrentDomain.BaseDirectory + @"Output\RectangleConfig.bmp");
+                    sc = swApp.GetPreviewBitmapFile(AppDomain.CurrentDomain.BaseDirectory + @"RectanglePlug\PlugTopBox.SLDPRT", "圆壳", AppDomain.CurrentDomain.BaseDirectory + @"Output\RoundConfig.bmp");
+                    if (sc)
+                    {
+                        MessageBox.Show("生成成功!");
+                    }
+                    //https://blog.csdn.net/zengqh0314/article/details/106011590
+                    //或建议用户使用Edrawing控件预览
+                }
+            }
+            #endregion
 
-        }
+
+
+            }
     }
 }
