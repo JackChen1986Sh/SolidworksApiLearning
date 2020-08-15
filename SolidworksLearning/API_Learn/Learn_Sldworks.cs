@@ -170,8 +170,9 @@ namespace SolidworksLearning.API_Learn
             MessageBox.Show("所有文档已关闭");
         }
 
-
-
-
+        public static void SystamSet(SldWorks iswApp)
+        {
+            iswApp.SetUserPreferenceToggle((int)swUserPreferenceToggle_e.swInputDimValOnCreate, true);
+        }
     }
 }
