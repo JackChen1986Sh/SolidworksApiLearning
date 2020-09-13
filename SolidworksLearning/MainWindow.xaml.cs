@@ -48,8 +48,8 @@ namespace SolidworksLearning
             CreateLessonRow("2.Solidworks应用程序对象", "SldWorks文档操作1", "新建文档", "打开文档", "所有文档");
             CreateLessonRow("3.Solidworks应用程序对象", "SldWorks文档操作2", "文档切换", "加载文档", "关闭文档");
             CreateLessonRow("4.Solidworks应用程序对象", "SldWorks文档与系统设置", "系统设置", "无", "无");
-
-
+            CreateLessonRow("5.Solidworks文档相关对象简介", "ModelDoc2及相关文档对象", "获取文档", "无", "无");
+            CreateLessonRow("6.Solidworks草图绘制基础", "SketchManager对象", "草图绘制", "无", "无");
 
         }
         public void CreateLessonRow(string an, string ad, string s1, string s2, string s3)
@@ -158,9 +158,44 @@ namespace SolidworksLearning
                 }
             }
             #endregion
+            #region 5.Solidworks文档相关对象简介
+            else if (rowindex == 4)//
+            {
+                SldWorks swApp = API_Learn.Learn_Sldworks.GetSolidworksApp();
+                if (sampleindex == 1)//获取文档
+                {
+                    API_Learn.Learn_ModelDoc2.GetDocObject(swApp);
+                }
+                else if (sampleindex == 2)//
+                {
 
+                }
+                else if (sampleindex == 3)//
+                {
 
-
+                }
             }
+            #endregion
+            #region 6.Solidworks草图绘制基础
+            else if (rowindex == 5)//
+            {
+                if (sampleindex == 1)//草图绘制
+                {
+                    SldWorks swApp = API_Learn.Learn_Sldworks.NewSolidworksApp();
+                    ModelDoc2 SketchDoc = swApp.NewPart();//新建零件,验证获得Solidworks程序对象成功
+                    API_Learn.Learn_SketchManager.DrawSketch(SketchDoc);
+                }
+                else if (sampleindex == 2)//
+                {
+
+                }
+                else if (sampleindex == 3)//
+                {
+
+                }
+            }
+            #endregion
+
+        }
     }
 }

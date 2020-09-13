@@ -71,6 +71,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="API_Learn\Learn_ModelDoc2.cs" />
+    <Compile Include="API_Learn\Learn_SketchManager.cs" />
     <Compile Include="API_Learn\Learn_Sldworks.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
