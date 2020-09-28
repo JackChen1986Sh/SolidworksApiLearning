@@ -204,7 +204,7 @@ namespace SolidworksLearning
                     ModelDoc2 SketchDoc = swApp.NewPart();//新建零件,验证获得Solidworks程序对象成功
                     try
                     {
-                        swApp.SetUserPreferenceToggle(10, false);//不弹出尺寸标注对话框
+                        swApp.SetUserPreferenceToggle(10, false);
                         API_Learn.Learn_SketchManager.AddConstraintAndDim(SketchDoc);
                     }
                     catch
@@ -213,7 +213,7 @@ namespace SolidworksLearning
                     }
                     finally
                     {
-                        swApp.SetUserPreferenceToggle(10, true);//恢复弹出尺寸标注对话框
+                        swApp.SetUserPreferenceToggle(10, true);
                     } 
                 }
                 else if (sampleindex == 2)//
