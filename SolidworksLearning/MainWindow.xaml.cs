@@ -51,6 +51,7 @@ namespace SolidworksLearning
             CreateLessonRow("5.Solidworks文档相关对象简介", "ModelDoc2及相关文档对象", "获取文档", "无", "无");
             CreateLessonRow("6.Solidworks草图绘制基础1", "SketchManager对象", "草图绘制", "无", "无");
             CreateLessonRow("7.Solidworks草图绘制基础2", "几何关系与尺寸添加", "示例", "无", "无");
+            CreateLessonRow("8.Solidworks特征创建简介", "FeatureManager对象", "拉伸", "基准面", "无");
         }
         public void CreateLessonRow(string an, string ad, string s1, string s2, string s3)
         {
@@ -214,11 +215,11 @@ namespace SolidworksLearning
                     finally
                     {
                         swApp.SetUserPreferenceToggle(10, true);//恢复弹出尺寸标注对话框
-                    } 
+                    }
                 }
                 else if (sampleindex == 2)//
                 {
-                
+
                 }
                 else if (sampleindex == 3)//
                 {
@@ -226,6 +227,54 @@ namespace SolidworksLearning
                 }
             }
             #endregion
+            #region 8.Solidworks特征创建基础1
+            else if (rowindex == 7)//
+            {
+                if (sampleindex == 1)//拉伸特征
+                {
+                    SldWorks swApp = API_Learn.Learn_Sldworks.NewSolidworksApp();
+                    ModelDoc2 FeatDoc = swApp.NewPart();//新建零件,验证获得Solidworks程序对象成功
+                    try
+                    {
+                        swApp.SetUserPreferenceToggle(10, false);//不弹出尺寸标注对话框
+                        API_Learn.Learn_SketchManager.AddConstraintAndDim(FeatDoc);
+                        FeatDoc.ClearSelection2(true);
+                        API_Learn.Learn_FeatureManager.CreateFeature1(FeatDoc);
+                    }
+                    catch
+                    {
+
+                    }
+                    finally
+                    {
+                        swApp.SetUserPreferenceToggle(10, true);//恢复弹出尺寸标注对话框
+                    }
+                }
+                else if (sampleindex == 2)//基准
+                {
+                    SldWorks swApp = API_Learn.Learn_Sldworks.NewSolidworksApp();
+                    ModelDoc2 FeatDoc = swApp.NewPart();//新建零件,验证获得Solidworks程序对象成功
+                    try
+                    {
+                        API_Learn.Learn_FeatureManager.CreatePlane(FeatDoc);
+                    }
+                    catch
+                    {
+
+                    }
+                    finally
+                    {
+                        swApp.SetUserPreferenceToggle(10, true);//恢复弹出尺寸标注对话框
+                    }
+                }
+                else if (sampleindex == 3)//
+                {
+
+                }
+            }
+            #endregion
+
+
         }
     }
 }
