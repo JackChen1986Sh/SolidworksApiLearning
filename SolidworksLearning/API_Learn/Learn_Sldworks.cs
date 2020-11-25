@@ -75,19 +75,23 @@ namespace SolidworksLearning.API_Learn
             MessageBox.Show(Sb.ToString().Trim());
         }
 
-        public static void OpenDoc(SldWorks iswApp)
+        public static ModelDoc2 OpenDoc(SldWorks iswApp,string DocPath,bool ShowMsg)
         {
             int err = -1;
             int warn = -1;
-            ModelDoc2 OpenDoc = iswApp.OpenDoc6(AppDomain.CurrentDomain.BaseDirectory + @"RectanglePlug\PlugTopBox.SLDPRT", (int)swDocumentTypes_e.swDocPART, (int)swOpenDocOptions_e.swOpenDocOptions_AutoMissingConfig, "圆壳", ref err, ref warn);
+            ModelDoc2 OpenDoc = iswApp.OpenDoc6(DocPath, (int)swDocumentTypes_e.swDocPART, (int)swOpenDocOptions_e.swOpenDocOptions_AutoMissingConfig, "圆壳", ref err, ref warn);
             if (OpenDoc != null)
             {
-                MessageBox.Show("零件打开成功:" + OpenDoc.GetTitle() + "\r\n");
+                if (ShowMsg)
+                {
+                    MessageBox.Show("零件打开成功:" + OpenDoc.GetTitle() + "\r\n");
+                }
             }
             else
             {
                 MessageBox.Show("零件打开失败！" + "\r\n");
             }
+            return OpenDoc;
         }
 
         public static void GetAllOpenedDoc(SldWorks iswApp)

@@ -52,6 +52,8 @@ namespace SolidworksLearning
             CreateLessonRow("6.Solidworks草图绘制基础1", "SketchManager对象", "草图绘制", "无", "无");
             CreateLessonRow("7.Solidworks草图绘制基础2", "几何关系与尺寸添加", "示例", "无", "无");
             CreateLessonRow("8.Solidworks特征创建简介", "FeatureManager对象", "拉伸", "基准面", "无");
+            CreateLessonRow("9.Solidworks属性", "CustomPropertyManager对象", "写入", "读取", "无");
+
         }
         public void CreateLessonRow(string an, string ad, string s1, string s2, string s3)
         {
@@ -115,7 +117,7 @@ namespace SolidworksLearning
                 }
                 else if (sampleindex == 2)//打开
                 {
-                    API_Learn.Learn_Sldworks.OpenDoc(swApp);
+                    API_Learn.Learn_Sldworks.OpenDoc(swApp, AppDomain.CurrentDomain.BaseDirectory + @"RectanglePlug\PlugTopBox.SLDPRT",true);
                 }
                 else if (sampleindex == 3)//所有文档
                 {
@@ -273,8 +275,41 @@ namespace SolidworksLearning
                 }
             }
             #endregion
+            #region 9.Solidworks属性
+            else if (rowindex == 8)//
+            {
+                SldWorks swApp = API_Learn.Learn_Sldworks.GetSolidworksApp();
+                ModelDoc2 Doc = swApp.ActiveDoc;
+                bool ToOpen = false;
+                if (Doc == null)
+                {
+                    ToOpen = true;
+                }
+                else
+                {
+                    if (Doc.GetTitle() != "Solidworks属性学习.SLDPRT")
+                    {
+                        ToOpen = true;
+                    }
+                }
+                if (ToOpen)
+                {
+                    Doc = API_Learn.Learn_Sldworks.OpenDoc(swApp, AppDomain.CurrentDomain.BaseDirectory + @"Sample\9\Solidworks属性学习.SLDPRT", false);
+                }
 
-
+                if (Doc != null)
+                {
+                    if (sampleindex == 1)//属性写入
+                    {
+                        API_Learn.Learn_CustomPropertyManager.WriteCusp(Doc);
+                    }
+                    else if (sampleindex == 2)//属性读取
+                    {
+                        API_Learn.Learn_CustomPropertyManager.ReadCusp(Doc);
+                    }
+                }
+            }
+            #endregion
         }
     }
 }
