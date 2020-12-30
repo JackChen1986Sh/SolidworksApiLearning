@@ -54,7 +54,8 @@ namespace SolidworksLearning
             CreateLessonRow("8.Solidworks特征创建简介", "FeatureManager对象", "拉伸", "基准面", "无");
             CreateLessonRow("9.Solidworks属性", "CustomPropertyManager对象", "写入", "读取", "无");
             CreateLessonRow("10.Solidworks配置", "ConfigurationManager对象", "创建配置", "获取配置", "删除配置");
-
+            CreateLessonRow("11.Solidworks获取选择", "SelectionMgr对象", "获取面", "获取边线","选择集");
+            //CreateLessonRow("12.Solidworks测量工具", "Measure对象", "圆柱", "边线", "圆柱与点");
         }
         public void CreateLessonRow(string an, string ad, string s1, string s2, string s3)
         {
@@ -350,6 +351,88 @@ namespace SolidworksLearning
                 }
             }
             #endregion
+            #region 10.获取选择对象
+            else if (rowindex == 10)//
+            {
+                SldWorks swApp = API_Learn.Learn_Sldworks.GetSolidworksApp();
+                ModelDoc2 Doc = swApp.ActiveDoc;
+                bool ToOpen = false;
+                if (Doc == null)
+                {
+                    ToOpen = true;
+                }
+                else
+                {
+                    if (Doc.GetTitle() != "SelectionMgr.SLDPRT")
+                    {
+                        ToOpen = true;
+                    }
+                }
+                if (ToOpen)
+                {
+                    Doc = API_Learn.Learn_Sldworks.OpenDoc(swApp, AppDomain.CurrentDomain.BaseDirectory + @"Sample\11\SelectionMgr.SLDPRT", false);
+                }
+
+                if (Doc != null)
+                {
+                    if (sampleindex == 1)//获取面
+                    {
+                        API_Learn.Learn_SelectionMgr.GetFace(Doc);
+                    }
+                    else if (sampleindex == 2)//获取边线
+                    {
+                        API_Learn.Learn_SelectionMgr.GetEdge(Doc);
+                    }
+                    else if (sampleindex == 3)//
+                    {
+                        API_Learn.Learn_SelectionMgr.GetSelectList(Doc);
+                    }
+                }
+            }
+            #endregion
+            #region 11.Solidworks测量工具
+            else if (rowindex == 11)//
+            {
+                SldWorks swApp = API_Learn.Learn_Sldworks.GetSolidworksApp();
+                ModelDoc2 Doc = swApp.ActiveDoc;
+                bool ToOpen = false;
+                if (Doc == null)
+                {
+                    ToOpen = true;
+                }
+                else
+                {
+                    if (Doc.GetTitle() != "Measure.SLDPRT")
+                    {
+                        ToOpen = true;
+                    }
+                }
+                if (ToOpen)
+                {
+                    Doc = API_Learn.Learn_Sldworks.OpenDoc(swApp, AppDomain.CurrentDomain.BaseDirectory + @"Sample\12\Measure.SLDPRT", false);
+                }
+
+                if (Doc != null)
+                {
+                    if (sampleindex == 1)//圆柱
+                    {
+                        API_Learn.Learn_Measure.MeasureFace(Doc);
+                    }
+                    else if (sampleindex == 2)//边线
+                    {
+                        API_Learn.Learn_Measure.MeasureEdge(Doc);
+                    }
+                    else if (sampleindex == 3)//圆柱与点
+                    {
+                        API_Learn.Learn_Measure.MeasurePointFace(Doc);
+                    }
+                }
+            }
+            #endregion
+
+
+
+
 
         }
     }
