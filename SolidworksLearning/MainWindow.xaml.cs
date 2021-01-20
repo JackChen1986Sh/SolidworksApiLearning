@@ -55,7 +55,7 @@ namespace SolidworksLearning
             CreateLessonRow("9.Solidworks属性", "CustomPropertyManager对象", "写入", "读取", "无");
             CreateLessonRow("10.Solidworks配置", "ConfigurationManager对象", "创建配置", "获取配置", "删除配置");
             CreateLessonRow("11.Solidworks获取选择", "SelectionMgr对象", "获取面", "获取边线","选择集");
-            //CreateLessonRow("12.Solidworks测量工具", "Measure对象", "圆柱", "边线", "圆柱与点");
+            CreateLessonRow("12.Solidworks测量工具", "Measure对象", "圆柱", "边线", "圆柱与点");
         }
         public void CreateLessonRow(string an, string ad, string s1, string s2, string s3)
         {
