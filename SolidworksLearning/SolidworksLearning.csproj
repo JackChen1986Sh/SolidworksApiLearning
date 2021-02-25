@@ -73,6 +73,7 @@
     </Page>
     <Compile Include="API_Learn\Learn_Configuration.cs" />
     <Compile Include="API_Learn\Learn_CustomPropertyManager.cs" />
+    <Compile Include="API_Learn\Learn_Dimension.cs" />
     <Compile Include="API_Learn\Learn_FeatureManager.cs" />
     <Compile Include="API_Learn\Learn_Measure.cs" />
     <Compile Include="API_Learn\Learn_ModelDoc2.cs" />

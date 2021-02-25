@@ -56,6 +56,7 @@ namespace SolidworksLearning
             CreateLessonRow("10.Solidworks配置", "ConfigurationManager对象", "创建配置", "获取配置", "删除配置");
             CreateLessonRow("11.Solidworks获取选择", "SelectionMgr对象", "获取面", "获取边线","选择集");
             CreateLessonRow("12.Solidworks测量工具", "Measure对象", "圆柱", "边线", "圆柱与点");
+            CreateLessonRow("13.Solidworks尺寸", "Dimension对象", "获得尺寸", "设置尺寸", "");
         }
         public void CreateLessonRow(string an, string ad, string s1, string s2, string s3)
         {
@@ -429,8 +430,48 @@ namespace SolidworksLearning
                 }
             }
             #endregion
+            #region 12.Solidworks尺寸
+            else if (rowindex == 12)//
+            {
+                SldWorks swApp = API_Learn.Learn_Sldworks.GetSolidworksApp();
+                ModelDoc2 Doc = swApp.ActiveDoc;
+                bool ToOpen = false;
+                if (Doc == null)
+                {
+                    ToOpen = true;
+                }
+                else
+                {
+                    if (Doc.GetTitle() != "Measure.SLDPRT")
+                    {
+                        ToOpen = true;
+                    }
+                }
+                if (ToOpen)
+                {
+                    Doc = API_Learn.Learn_Sldworks.OpenDoc(swApp, AppDomain.CurrentDomain.BaseDirectory + @"Sample\13\Dimension.SLDPRT", false);
+                }
 
-
+                if (Doc != null)
+                {
+                    if (sampleindex == 1)//圆柱
+                    {
+                        API_Learn.Learn_Dimension.GetDim(Doc, "L@草图1");
+                    }
+                    else if (sampleindex == 2)//边线
+                    {
+                        Dictionary<string, double> Vals = new Dictionary<string, double>();
+                        Vals.Add("Default", 66);
+                        Vals.Add("cfg2", 77);
+                        API_Learn.Learn_Dimension.SetDim(Doc, "L@草图1", Vals);
+                    }
+                    else if (sampleindex == 3)//圆柱与点
+                    {
+                       
+                    }
+                }
+            }
+            #endregion
 
 
 
