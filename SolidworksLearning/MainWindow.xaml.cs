@@ -57,6 +57,7 @@ namespace SolidworksLearning
             CreateLessonRow("11.Solidworks获取选择", "SelectionMgr对象", "获取面", "获取边线","选择集");
             CreateLessonRow("12.Solidworks测量工具", "Measure对象", "圆柱", "边线", "圆柱与点");
             CreateLessonRow("13.Solidworks尺寸", "Dimension对象", "获得尺寸", "设置尺寸", "");
+            CreateLessonRow("14.Solidworks装配体对象", "AssemblyDoc对象", "获取子部件", "插入零部件", "");
         }
         public void CreateLessonRow(string an, string ad, string s1, string s2, string s3)
         {
@@ -467,13 +468,50 @@ namespace SolidworksLearning
                     }
                     else if (sampleindex == 3)//圆柱与点
                     {
-                       
+
                     }
                 }
             }
             #endregion
+            #region 13.Solidworks装配体对象
+            else if (rowindex == 13)//
+            {
+                SldWorks swApp = API_Learn.Learn_Sldworks.GetSolidworksApp();
+                ModelDoc2 Doc = swApp.ActiveDoc;
+                bool ToOpen = false;
+                if (Doc == null)
+                {
+                    ToOpen = true;
+                }
+                else
+                {
+                    if (Doc.GetTitle() != "Assem.SLDASM")
+                    {
+                        ToOpen = true;
+                    }
+                }
+                if (ToOpen)
+                {
+                    Doc = API_Learn.Learn_Sldworks.OpenDoc(swApp, AppDomain.CurrentDomain.BaseDirectory + @"Sample\14\Assem.SLDASM", false, swDocumentTypes_e.swDocASSEMBLY);
+                }
 
-
+                if (Doc != null)
+                {
+                    if (sampleindex == 1)//获取子部件
+                    {
+                        API_Learn.Learn_AssemblyDoc.GetChildrenComp(Doc);
+                    }
+                    else if (sampleindex == 2)//插入零部件
+                    {
+                        API_Learn.Learn_AssemblyDoc.InsertPart(swApp,Doc, AppDomain.CurrentDomain.BaseDirectory + @"Sample\14\part3.SLDPRT");
+                    }
+                    else if (sampleindex == 3)//
+                    {
+                        
+                    }
+                }
+            }
+            #endregion
 
         }
     }

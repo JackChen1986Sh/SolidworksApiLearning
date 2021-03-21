@@ -75,11 +75,11 @@ namespace SolidworksLearning.API_Learn
             MessageBox.Show(Sb.ToString().Trim());
         }
 
-        public static ModelDoc2 OpenDoc(SldWorks iswApp,string DocPath,bool ShowMsg)
+        public static ModelDoc2 OpenDoc(SldWorks iswApp,string DocPath,bool ShowMsg, swDocumentTypes_e dc= swDocumentTypes_e.swDocPART)
         {
             int err = -1;
             int warn = -1;
-            ModelDoc2 OpenDoc = iswApp.OpenDoc6(DocPath, (int)swDocumentTypes_e.swDocPART, (int)swOpenDocOptions_e.swOpenDocOptions_AutoMissingConfig, "圆壳", ref err, ref warn);
+            ModelDoc2 OpenDoc = iswApp.OpenDoc6(DocPath, (int)dc, (int)swOpenDocOptions_e.swOpenDocOptions_AutoMissingConfig, "圆壳", ref err, ref warn);
             if (OpenDoc != null)
             {
                 if (ShowMsg)
