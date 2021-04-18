@@ -52,6 +52,48 @@ namespace SolidworksLearning.API_Learn
             ((AssemblyDoc)Doc).AddComponent5(newpartpath, 0, "", true, "挖孔", 1, 0.3, 0);
             swApp.CloseDoc(newpartpath);
         }
+       
+        public static void AddMate(SldWorks swApp, ModelDoc2 Doc, string newpartpath)
+        {
+            #region 添加部件
+            swApp.OpenDoc(newpartpath, 1);
+            ((AssemblyDoc)Doc).AddComponent5(newpartpath, 0, "", false, "", 0, 0.3, 0);
+            swApp.CloseDoc(newpartpath);
+            #endregion
+
+            Component2 BaseComp = ((AssemblyDoc)Doc).GetComponentByName("底座-1");
+            Component2 RoateComp = ((AssemblyDoc)Doc).GetComponentByName("转轴-1");
+
+            int err = 0;
+            #region 轴装配
+            Feature BaseAxi = BaseComp.FeatureByName("基准轴1");
+            Feature RoateAxi = RoateComp.FeatureByName("转轴中心轴");
+            BaseAxi.Select(false);
+            RoateAxi.Select(true);
+            ((AssemblyDoc)Doc).AddMate5((int)swMateType_e.swMateCOINCIDENT, (int)swMateAlign_e.swMateAlignALIGNED,false,0,0,0,0,0,0,0,0,false,false,0,out err);
+            #endregion
+
+            #region 底面装配距离
+            Feature BaseBp = BaseComp.FeatureByName("Top");
+            Feature RoateBp = RoateComp.FeatureByName("Top");
+            BaseBp.Select(false);
+            RoateBp.Select(true);
+            ((AssemblyDoc)Doc).AddMate5((int)swMateType_e.swMateDISTANCE, (int)swMateAlign_e.swMateAlignALIGNED, false, 10/1000.0, 10 / 1000.0, 10 / 1000.0, 0, 0, 0, 0, 0, false, false, 0, out err);
+            #endregion
+
+            #region 方位装配
+            Feature BaseOir = BaseComp.FeatureByName("Right");
+            Feature RoateOir = RoateComp.FeatureByName("Right");
+            BaseOir.Select(false);
+            RoateOir.Select(true);
+            ((AssemblyDoc)Doc).AddMate5((int)swMateType_e.swMateANGLE, (int)swMateAlign_e.swMateAlignALIGNED, false,0, 0, 0, 0, 0, (30/180.0)*Math.PI, (30 / 180.0) * Math.PI, (30 / 180.0) * Math.PI, false, false, 0, out err);
+            #endregion
+
+            Doc.EditRebuild3();
+        }
+
+
+
 
 
     }

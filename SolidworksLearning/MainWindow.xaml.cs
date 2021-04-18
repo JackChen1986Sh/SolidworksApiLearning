@@ -58,6 +58,7 @@ namespace SolidworksLearning
             CreateLessonRow("12.Solidworks测量工具", "Measure对象", "圆柱", "边线", "圆柱与点");
             CreateLessonRow("13.Solidworks尺寸", "Dimension对象", "获得尺寸", "设置尺寸", "");
             CreateLessonRow("14.Solidworks装配体对象", "AssemblyDoc对象", "获取子部件", "插入零部件", "");
+            CreateLessonRow("15.Solidworks装配体对象", "AssemblyDoc对象", "装配", "", "");
         }
         public void CreateLessonRow(string an, string ad, string s1, string s2, string s3)
         {
@@ -512,6 +513,46 @@ namespace SolidworksLearning
                 }
             }
             #endregion
+            #region 14.Solidworks装配体对象
+            else if (rowindex == 14)//
+            {
+                SldWorks swApp = API_Learn.Learn_Sldworks.GetSolidworksApp();
+                ModelDoc2 Doc = swApp.ActiveDoc;
+                bool ToOpen = false;
+                if (Doc == null)
+                {
+                    ToOpen = true;
+                }
+                else
+                {
+                    if (Doc.GetTitle() != "装配学习.SLDASM")
+                    {
+                        ToOpen = true;
+                    }
+                }
+                if (ToOpen)
+                {
+                    Doc = API_Learn.Learn_Sldworks.OpenDoc(swApp, AppDomain.CurrentDomain.BaseDirectory + @"Sample\15\装配学习.SLDASM", false, swDocumentTypes_e.swDocASSEMBLY);
+                }
+
+                if (Doc != null)
+                {
+                    if (sampleindex == 1)//部件装配
+                    {
+                        API_Learn.Learn_AssemblyDoc.AddMate(swApp, Doc, AppDomain.CurrentDomain.BaseDirectory + @"Sample\15\转轴.SLDPRT");
+                    }
+                    else if (sampleindex == 2)//
+                    {
+                       
+                    }
+                    else if (sampleindex == 3)//
+                    {
+
+                    }
+                }
+            }
+            #endregion
+
 
         }
     }
