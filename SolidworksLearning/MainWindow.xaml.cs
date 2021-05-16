@@ -59,6 +59,7 @@ namespace SolidworksLearning
             CreateLessonRow("13.Solidworks尺寸", "Dimension对象", "获得尺寸", "设置尺寸", "");
             CreateLessonRow("14.Solidworks装配体对象", "AssemblyDoc对象", "获取子部件", "插入零部件", "");
             CreateLessonRow("15.Solidworks装配体对象", "AssemblyDoc对象", "装配", "", "");
+            CreateLessonRow("16.Solidworks部件对象", "Component2对象", "状态设置", "明细表", "配置");
         }
         public void CreateLessonRow(string an, string ad, string s1, string s2, string s3)
         {
@@ -552,7 +553,47 @@ namespace SolidworksLearning
                 }
             }
             #endregion
+            #region 15.Solidworks装配体部件设置
+            else if (rowindex == 15)//
+            {
+                SldWorks swApp = API_Learn.Learn_Sldworks.GetSolidworksApp();
+                ModelDoc2 Doc = swApp.ActiveDoc;
+                bool ToOpen = false;
+                if (Doc == null)
+                {
+                    ToOpen = true;
+                }
+                else
+                {
+                    if (Doc.GetTitle() != "装配学习.SLDASM")
+                    {
+                        ToOpen = true;
+                    }
+                }
+                if (ToOpen)
+                {
+                    Doc = API_Learn.Learn_Sldworks.OpenDoc(swApp, AppDomain.CurrentDomain.BaseDirectory + @"Sample\16\装配学习.SLDASM", false, swDocumentTypes_e.swDocASSEMBLY);
+                }
 
+                if (Doc != null)
+                {
+                    Component2 SwComp = ((AssemblyDoc)swApp.ActiveDoc).GetComponentByName("转轴-1");
+                    if (sampleindex == 1)//部件状态设置，压缩，解压，轻化
+                    {
+                        API_Learn.Learn_Component2.SetComponentsStatus(SwComp);
+
+                    }
+                    else if (sampleindex == 2)//排除明细表
+                    {
+                        API_Learn.Learn_Component2.SetCompBomInclude(SwComp);
+                    }
+                    else if (sampleindex == 3)//配置
+                    {
+                        API_Learn.Learn_Component2.SetCompConfig(swApp.ActiveDoc, SwComp);
+                    }
+                }
+            }
+            #endregion
 
         }
     }
