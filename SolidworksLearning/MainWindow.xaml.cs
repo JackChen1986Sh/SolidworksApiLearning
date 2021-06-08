@@ -60,6 +60,7 @@ namespace SolidworksLearning
             CreateLessonRow("14.Solidworks装配体对象", "AssemblyDoc对象", "获取子部件", "插入零部件", "");
             CreateLessonRow("15.Solidworks装配体对象", "AssemblyDoc对象", "装配", "", "");
             CreateLessonRow("16.Solidworks部件对象", "Component2对象", "状态设置", "明细表", "配置");
+            CreateLessonRow("17.Solidworks配合对象", "Mate2对象", "配合类型", "配合参数", "");
         }
         public void CreateLessonRow(string an, string ad, string s1, string s2, string s3)
         {
@@ -594,6 +595,49 @@ namespace SolidworksLearning
                 }
             }
             #endregion
+            #region 16.Solidworks装配体配合对象
+            else if (rowindex == 16)//
+            {
+                SldWorks swApp = API_Learn.Learn_Sldworks.GetSolidworksApp();
+                ModelDoc2 Doc = swApp.ActiveDoc;
+                bool ToOpen = false;
+                if (Doc == null)
+                {
+                    ToOpen = true;
+                }
+                else
+                {
+                    if (Doc.GetTitle() != "装配学习.SLDASM")
+                    {
+                        ToOpen = true;
+                    }
+                }
+                if (ToOpen)
+                {
+                    Doc = API_Learn.Learn_Sldworks.OpenDoc(swApp, AppDomain.CurrentDomain.BaseDirectory + @"Sample\17\装配学习.SLDASM", false, swDocumentTypes_e.swDocASSEMBLY);
+                }
+
+                if (Doc != null)
+                {
+                    Component2 SwComp = ((AssemblyDoc)swApp.ActiveDoc).GetComponentByName("转轴-1");
+                    if (sampleindex == 1)//获得配合对象
+                    {
+                        API_Learn.Learn_Mate2.GetMateType(SwComp);
+                    }
+                    else if (sampleindex == 2)//获得配合参数
+                    {
+                        API_Learn.Learn_Mate2.GetMateRefrence(SwComp);
+                    }
+                    else if (sampleindex == 3)
+                    {
+                        
+                    }
+                }
+            }
+            #endregion
+
+
+
 
         }
     }
